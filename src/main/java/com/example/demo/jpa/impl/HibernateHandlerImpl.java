@@ -1,8 +1,8 @@
 package com.example.demo.jpa.impl;
 
+import com.example.demo.dao.HibernateBaseDao;
 import com.example.demo.domain.core.BaseEntity;
 import com.example.demo.jpa.HibernateHandler;
-import com.example.demo.jpa.domain.hibernate.HibernateBaseDao;
 import com.example.demo.jpa.domain.hibernate.QueryParam;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -40,6 +40,7 @@ public class HibernateHandlerImpl implements HibernateHandler,ApplicationListene
     public void onApplicationEvent(ApplicationReadyEvent event) {
         if(event.getApplicationContext()!=null){
             Map<String,HibernateBaseDao> daoCollection=event.getApplicationContext().getBeansOfType(HibernateBaseDao.class);
+            logger.info("dao total {}",daoCollection.size());
             for (HibernateBaseDao dao:daoCollection.values()){
                 logger.info("{} Register DaoMap:{} -> {}",this.getClass().getTypeName(),dao.getEntityClazz().getCanonicalName(),dao.getClass().getCanonicalName());
                 this.daoMap.put(dao.getEntityClazz().getCanonicalName(), dao);
@@ -134,6 +135,7 @@ public class HibernateHandlerImpl implements HibernateHandler,ApplicationListene
     @Override
     public <T> List<T> getEntityListByPropertys(Class<T> entityClass, Map<String, Object> param, Map<String, String> orderProps) {
         HibernateBaseDao dao=this.getDao(entityClass.getCanonicalName());
+        System.out.println("---------------->"+dao);
         return dao.getEntityListByPropertys(param,orderProps);
     }
 

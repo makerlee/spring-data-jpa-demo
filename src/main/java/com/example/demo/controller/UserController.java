@@ -2,6 +2,8 @@ package com.example.demo.controller;
 
 import com.example.demo.domain.User;
 import com.example.demo.jpa.HibernateHandler;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -23,18 +25,25 @@ public class UserController {
 
     @RequestMapping(value = "/login",method = RequestMethod.POST)
     public String login(@RequestParam("account") String account,
-                        @RequestParam("passwd") String passwd){
+                        @RequestParam("passwd") String passwd) {
 
-        Map<String,Object> params = new HashMap<>();
-        params.put("userName",account);
-        params.put("loginPwd",passwd);
-        List<User> result = this.hibernateHandler.getEntityListByPropertys(User.class,params);
-        if(result != null || result.size()>0){
+        Map<String, Object> params = new HashMap<>();
+        params.put("userName", account);
+        params.put("loginPwd", passwd);
+        List<User> result = this.hibernateHandler.getEntityListByPropertys(User.class, params);
+        String response = "登录失败";
+        if (result != null && result.size() > 0) {
             User user = result.get(0);
             //// TODO: 2017/7/31 返回用户信息
-        }else{
-            //// TODO: 2017/7/31 登录失败 
+            ObjectMapper mapper = new ObjectMapper();
+            try {
+                response = mapper.writeValueAsString(user);
+            } catch (JsonProcessingException e) {
+                e.printStackTrace();
+            }
+        } else {
+            //// TODO: 2017/7/31 登录失败
         }
-        return null;
+        return response;
     }
 }

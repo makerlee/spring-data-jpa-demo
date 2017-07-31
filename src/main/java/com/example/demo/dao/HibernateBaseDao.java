@@ -1,6 +1,7 @@
-package com.example.demo.jpa.domain.hibernate;
+package com.example.demo.dao;
 
 import com.example.demo.domain.core.BaseEntity;
+import com.example.demo.jpa.domain.hibernate.QueryParam;
 import org.hibernate.Query;
 import org.hibernate.SessionFactory;
 import org.slf4j.Logger;
