@@ -61,4 +61,13 @@ public class User extends BaseEntity{
     public void setLoginState(String loginState) {
         this.loginState = loginState;
     }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "userName='" + userName + '\'' +
+                ", loginPwd='" + loginPwd + '\'' +
+                ", loginState='" + loginState + '\'' +
+                '}';
+    }
 }
