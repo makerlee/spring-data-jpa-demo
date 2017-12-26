@@ -1,9 +1,7 @@
 package com.example.demo.services.impl;
 
 import com.example.demo.dao.IUserDao;
-import com.example.demo.dao.UserDao;
 import com.example.demo.domain.User;
-import com.example.demo.jpa.HibernateHandler;
 import com.example.demo.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -13,8 +11,8 @@ import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.data.jpa.domain.Specifications;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
-import javax.persistence.criteria.*;
 import java.util.List;
 
 /**
@@ -24,6 +22,7 @@ import java.util.List;
 public class UserServiceImpl implements UserService{
     @Autowired
     private IUserDao userDao;
+
     @Override
     public List<User> getPage(String keyWords, int pageIndex, int pageSize) {
         Specification<User> specification = Specifications.
@@ -33,5 +32,18 @@ public class UserServiceImpl implements UserService{
 
         Page<User> all = userDao.findAll(specification, pageable);
         return all.getContent();
+    }
+
+    @Transactional
+    @Override
+    public void addAge(String id) {
+        User user = userDao.findById(id);
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        user.setAge(user.getAge() + 1);
+        userDao.save(user);
     }
 }

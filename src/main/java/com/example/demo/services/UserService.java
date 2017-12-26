@@ -9,4 +9,6 @@ import java.util.List;
  */
 public interface UserService {
     List<User> getPage(String keyWords, int pageIndex, int pageSize);
+
+    void addAge(String id);
 }

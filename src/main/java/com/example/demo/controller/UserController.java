@@ -2,6 +2,7 @@ package com.example.demo.controller;
 
 import com.example.demo.domain.User;
 import com.example.demo.jpa.HibernateHandler;
+import com.example.demo.services.UserService;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +23,15 @@ import java.util.Map;
 public class UserController {
     @Autowired
     private HibernateHandler hibernateHandler;
+
+    @Autowired
+    private UserService userService;
+
+    @RequestMapping(value = "/addAge",method = RequestMethod.POST)
+    public String test(@RequestParam("id") String id){
+        userService.addAge(id);
+        return "success";
+    }
 
     @RequestMapping(value = "/login",method = RequestMethod.POST)
     public String login(@RequestParam("account") String account,

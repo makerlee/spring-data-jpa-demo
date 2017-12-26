@@ -4,7 +4,6 @@ import com.example.demo.domain.core.BaseEntity;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
-import java.io.Serializable;
 
 /**
  * Created by lijiyang on 2017/7/31.
@@ -60,6 +59,18 @@ public class User extends BaseEntity{
 
     public void setLoginState(String loginState) {
         this.loginState = loginState;
+    }
+
+    @Column(name = "age")
+    @Basic
+    private Integer age;
+
+    public Integer getAge() {
+        return age;
+    }
+
+    public void setAge(Integer age) {
+        this.age = age;
     }
 
     @Override
