@@ -1,6 +1,5 @@
 package com.example.demo.dao;
 
-import com.example.demo.domain.User;
 import com.example.demo.domain.core.BaseEntity;
 import com.example.demo.jpa.domain.hibernate.QueryParam;
 import org.hibernate.Query;

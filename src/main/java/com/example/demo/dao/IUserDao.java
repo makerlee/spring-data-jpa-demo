@@ -13,9 +13,12 @@ import javax.persistence.LockModeType;
  * Created by lijiyang on 2017/7/31.
  */
 public interface IUserDao extends JpaRepository<User,String>,JpaSpecificationExecutor<User>{
+
     @Lock(LockModeType.PESSIMISTIC_WRITE)
     @Query("select user from User user where user.id=:id ")
     User findById(@Param("id")String id);
+
+
 
     User save(User user);
 }

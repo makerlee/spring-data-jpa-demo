@@ -27,6 +27,11 @@ public class UserController {
     @Autowired
     private UserService userService;
 
+    /**
+     * 使用悲观锁实现并发访问的情况下，age可以正常++
+     * @param id
+     * @return
+     */
     @RequestMapping(value = "/addAge",method = RequestMethod.POST)
     public String test(@RequestParam("id") String id){
         userService.addAge(id);
@@ -56,4 +61,12 @@ public class UserController {
         }
         return response;
     }
+
+    public static void main(String[] args) {
+        System.out.println("0x28".getBytes());
+        for (byte b:"0x28".getBytes()){
+            System.out.println(b);
+        }
+    }
+
 }

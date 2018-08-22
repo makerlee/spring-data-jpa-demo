@@ -1,7 +1,6 @@
 package com.example.demo.dao;
 
 import com.example.demo.domain.User;
-import org.jboss.jandex.Main;
 import org.springframework.stereotype.Repository;
 
 import java.lang.reflect.ParameterizedType;
@@ -21,14 +20,4 @@ public class UserDao extends HibernateBaseDao<User> {
         }
         return this.entityClazz;
     }
-
-//    public static void main(String[] args) {
-//        UserDao userDao = new UserDao();
-//        String can = userDao.getEntityClazz().getCanonicalName();
-//        String name = userDao.getEntityClazz().getName();
-//
-//        System.out.println("--------->"+can);
-//        System.out.println("_________>"+name);
-//    }
-
 }
