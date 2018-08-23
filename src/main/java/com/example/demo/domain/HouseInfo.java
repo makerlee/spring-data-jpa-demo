@@ -42,7 +42,7 @@ public class HouseInfo extends BaseEntity{
     @Column(name = "lianjia_id",nullable = false)
     private String lianjiaID = "";
 
-    @Column(name = "lianjia_id",nullable = false)
+    @Column(name = "snap_date",nullable = false)
     private Date snapDate = new Date();
 
     public String getId() {

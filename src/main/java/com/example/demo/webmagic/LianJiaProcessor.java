@@ -17,7 +17,7 @@ public class LianJiaProcessor implements PageProcessor{
 
     static {
         ALL_LIST = new ArrayList<String>();
-        for (int i=2;i<10;i++){
+        for (int i=2;i<101;i++){
             ALL_LIST.add("https://zz.lianjia.com/ershoufang/pg"+i);
         }
     }
@@ -37,7 +37,6 @@ public class LianJiaProcessor implements PageProcessor{
             page.addTargetRequests(ALL_LIST);
             page.addTargetRequests(page.getHtml().links().regex(URL_DETAIL).all());
         }else {
-            System.out.println("--->detail");
             page.putField("title",page.getHtml().xpath("//div[@class='content']/div[@class='title']/h1/text()").toString());
             page.putField("subTitle",page.getHtml().xpath("//div[@class='content']/div[@class='title']/div/text()").toString());
             page.putField("price",page.getHtml().xpath("//div[@class='unitPrice']/span/text()").toString());
@@ -50,6 +49,7 @@ public class LianJiaProcessor implements PageProcessor{
             page.putField("lianjiaID",page.getHtml().xpath("//div[@class='houseRecord']/span[@class='info']/text()").toString());
         }
     }
+
 
     @Override
     public Site getSite() {

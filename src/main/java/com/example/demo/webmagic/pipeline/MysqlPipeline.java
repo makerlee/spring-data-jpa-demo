@@ -24,6 +24,7 @@ public class MysqlPipeline implements Pipeline {
         if (resultItems.get("title")==null || "".equals(resultItems.get("title"))){
             return;
         }
+
         HouseInfo info = new HouseInfo();
         info.setTitile(resultItems.get("title"));
         info.setSubTitile(resultItems.get("subTitle"));
